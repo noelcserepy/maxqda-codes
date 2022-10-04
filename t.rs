@@ -1,0 +1,1 @@
+import { writeText } from "@tauri-apps/api/clipboard";  const copyToClipboard = async () => {   await writeText("Sample Text"); }; 
