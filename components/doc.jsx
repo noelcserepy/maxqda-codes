@@ -2,7 +2,7 @@ import Row from "../components/row";
 import Codes from "../components/codes";
 import React from "react";
 
-export default function Page({ pageLines, codeProps }) {
+export default function Doc({ pageLines, codeProps }) {
 	return (
 		<div className="w-[21cm] h-[29.7cm] bg-gray-100 flex justify-end items-start text-black font-sans text-xs mainPage p-6 break-after-page">
 			<div className="flex h-full w-full relative justify-start items-start">

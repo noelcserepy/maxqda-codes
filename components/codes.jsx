@@ -18,12 +18,12 @@ export default function Codes({ pageCodes: codes, pageNumber, linesPerPage }) {
 		);
 	}
 	return (
-		<div className={`w-full h-full`}>
+		<div className="w-1/6 h-full">
 			<svg
 				viewBox={`0 ${lineHeight / 2} 400 ${vbHeight}`}
-				className="w-full h-full absolute"
-				preserveAspectRatio="xMaxYMin meet">
-				<rect x={0} y={0} width="400" height={vbHeight} fill="red" />
+				className="w-full h-full"
+				preserveAspectRatio="none">
+				<rect x={0} y={0} width="400" height="100%" fill="red" />
 				{codes.map((c, i) => {
 					const start = (c.start - pageNumber * linesPerPage) * lineHeight;
 					const end = (c.end - pageNumber * linesPerPage) * lineHeight;
