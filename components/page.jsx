@@ -30,3 +30,26 @@ export default function Page({ pageLines, codeProps }) {
 		</div>
 	);
 }
+
+<div className="flex h-full w-full relative justify-start items-start">
+	{/* <Codes {...docCodes} /> */}
+
+	<table className="table-auto border-collapse w-5/6 h-full break-inside-auto">
+		<thead>
+			<tr>
+				<th className="bg-slate-300 border h-2">Line</th>
+				<th className="bg-slate-300 border border-l-white h-2">Text</th>
+			</tr>
+		</thead>
+		<tbody>
+			{docLines.map((l, i) => (
+				<React.Fragment key={i}>
+					{/* {l.text[1] === ":" && i !== 0 && (
+										<Row line="&nbsp;" text="" />
+									)} */}
+					<Row line={l.line} text={l.text} />
+				</React.Fragment>
+			))}
+		</tbody>
+	</table>
+</div>;

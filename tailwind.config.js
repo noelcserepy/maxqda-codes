@@ -6,6 +6,12 @@ module.exports = {
 	],
 	theme: {
 		extend: {
+			gridTemplateColumns: {
+				20: "repeat(20, minmax(1fr, 1fr))",
+			},
+			// gridTemplateRows: {
+			// 	20: "repeat(20, minmax(1fr, 1fr))",
+			// },
 			colors: {
 				ablauf: "#2364A2",
 				manGem: "#6DA529",
