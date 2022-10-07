@@ -1,72 +1,82 @@
 import getDocCodes from "../components/getPageCodes";
 import React from "react";
+import Head from "next/head";
 
 export default function Doc() {
 	const docName = "SB_04";
 	const docLines = require(`../data/${docName}.json`);
-	const docCodes = getDocCodes(docName);
-	const totalLayers = 6;
+	const { docCodes, totalLayers } = getDocCodes(docName);
+
+	const codeWidth = 20;
+
 	return (
-		<div className="w-[21cm] h-[29.7cm] bg-gray-100 flex justify-end items-start text-black font-sans text-xs mainPage p-6 break-after-page">
-			<div className="grid grid-cols-20 w-full h-full">
-				{docCodes.map((c, i) => {
-					return (
-						<div
-							key={`${i}${c.start}${c.end}`}
-							className={`row-start-[${c.start}] row-end-[${
-								c.end
-							}] col-start-[${totalLayers - c.layer - 2}] col-end-[${
-								totalLayers - c.layer - 1
-							}]`}>
-							1
-						</div>
-						// return (
-						// 	<div
-						// 		key={`${i}${c.start}${c.end}`}
-						// 		className={`[grid-row-start:_${c.start}] [grid-row-end:_${
-						// 			c.end
-						// 		}] [grid-column-start:_${totalLayers - c.layer - 2}]`}>
-						// 		1
-						// 	</div>
-						// return (
-						// 	<div
-						// 		key={`${i}${c.start}${c.end}`}
-						// 		className={`row-[${c.start}_/_span_${c.end - c.start}] col-[${
-						// 			totalLayers - c.layer - 2
-						// 		}_/_span_1]`}>
-						// 		1
-						// 	</div>
-					);
-				})}
-				<div className="w-full col-start-6 col-end-7 bg-slate-300 border text-center">
-					lines
+		<>
+			<Head>
+				<title>{docName}</title>
+			</Head>
+			<div className="flex justify-center items-start text-black font-sans text-xs p4">
+				<div
+					className="grid w-full h-full"
+					style={{
+						gridTemplateColumns: `repeat(6, ${codeWidth}px) repeat(10, 1fr)`,
+					}}>
+					{docCodes.map((c, i) => {
+						return (
+							<div
+								className="w-2 relative"
+								key={`${i}${c.start}${c.end}`}
+								style={{
+									gridRow: `${c.start} / ${c.end + 1}`,
+									gridColumn: `${6 - c.layer} / span 1`,
+									border: `2px solid ${c.color}`,
+									borderRight: "none",
+								}}>
+								<div
+									className="absolute -left-[1px] top-1/2 border-2 rounded-full -translate-x-1/2 -translate-y-1/2 bg-white w-2 h-2"
+									style={{ border: `2px solid ${c.color}` }}
+								/>
+							</div>
+						);
+					})}
+
+					<div className="w-full col-start-[7] col-end-[8] bg-slate-300 border text-center">
+						Zeile
+					</div>
+					<div className="w-full col-start-[8] col-end-[17] bg-slate-300 border text-center">
+						Text
+					</div>
+					{docLines.map((l, i) => (
+						<React.Fragment key={i}>
+							<div className="w-full bg-slate-200 col-start-[7] col-end-[8] text-center">
+								<table className="mx-auto">
+									<tbody>
+										<tr>
+											<td className="break-inside-avoid break-after-auto">
+												{l.line}
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div className="col-start-[8] col-end-[17] pl-2">
+								{l.text.split(" ").map((t, i) => {
+									if (t[0] === "_" && t[t.length - 1] === "_") {
+										return (
+											<span key={t + i}>
+												<span className="underline">
+													{t.slice(1, t.length - 1)}
+												</span>{" "}
+											</span>
+										);
+									} else {
+										return <span key={t + i}>{t + " "}</span>;
+									}
+								})}
+							</div>
+						</React.Fragment>
+					))}
 				</div>
-				<div className="w-full col-start-7 col-end-21 bg-slate-300 border text-center">
-					Text
-				</div>
-				{docLines.map((l, i) => (
-					<React.Fragment key={i}>
-						<div className="w-full bg-slate-200 col-start-6 col-end-7 text-center">
-							{l.line}
-						</div>
-						<div className="col-start-7 col-end-21">
-							{l.text.split(" ").map((t, i) => {
-								if (t[0] === "_" && t[t.length - 1] === "_") {
-									return (
-										<span key={t + i}>
-											<span className="underline">
-												{t.slice(1, t.length - 1)}
-											</span>{" "}
-										</span>
-									);
-								} else {
-									return <span key={t + i}>{t + " "}</span>;
-								}
-							})}
-						</div>
-					</React.Fragment>
-				))}
 			</div>
-		</div>
+		</>
 	);
 }

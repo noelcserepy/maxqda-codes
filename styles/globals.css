@@ -2,11 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-@media print {
+@page {
+    size: A4;
+    margin: 25mm 25mm 20mm 25mm; 
+    
+    @top-center {
+        content: asdf;
+    }
+}
+
+/* @media print {
     html, body{
         width: 21cm;
         height: 29.7cm;
-        /* margin: 30mm 45mm 30mm 45mm;  */
-        /* change the margins as you want them to be. */
-   } 
-}
+    }
+} */

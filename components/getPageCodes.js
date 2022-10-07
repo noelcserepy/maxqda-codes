@@ -39,7 +39,7 @@ export default function getDocCodes(docName) {
 
 			for (let j = 0; j < layers[i].length; j++) {
 				if (
-					(anfang >= layers[i][j][0] && anfang <= layers[i][j][1]) ||
+					(anfang >= layers[i][j][0] && anfang <= layers[i][j][1] + 1) ||
 					(ende >= layers[i][j][0] && ende <= layers[i][j][1])
 				) {
 					layerUp = true;
@@ -59,15 +59,13 @@ export default function getDocCodes(docName) {
 	};
 
 	const processedCodes = docCodes.map(c => {
-		const codeProps = {
+		return {
 			color: getColor(c),
 			layer: getLayer(c),
-			start: c.Anfang,
-			end: c.Ende,
+			start: parseInt(c.Anfang),
+			end: parseInt(c.Ende),
 		};
-
-		return codeProps;
 	});
 
-	return processedCodes;
+	return { docCodes: processedCodes, totalLayers: layers.length };
 }
