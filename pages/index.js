@@ -1,5 +1,5 @@
 import getDocCodes from "../components/getPageCodes";
-import React from "react";
+import React, { useEffect } from "react";
 import Head from "next/head";
 
 export default function Doc() {
@@ -14,7 +14,8 @@ export default function Doc() {
 			<Head>
 				<title>{docName}</title>
 			</Head>
-			<div className="flex justify-center items-start text-black font-sans text-xs p4">
+
+			<div className="flex justify-center items-start text-black font-sans text-xs p4 bg-slate-100">
 				<div
 					className="grid w-full h-full"
 					style={{
@@ -23,7 +24,7 @@ export default function Doc() {
 					{docCodes.map((c, i) => {
 						return (
 							<div
-								className="w-2 relative"
+								className="w-2 relative "
 								key={`${i}${c.start}${c.end}`}
 								style={{
 									gridRow: `${c.start} / ${c.end + 1}`,
@@ -48,15 +49,7 @@ export default function Doc() {
 					{docLines.map((l, i) => (
 						<React.Fragment key={i}>
 							<div className="w-full bg-slate-200 col-start-[7] col-end-[8] text-center">
-								<table className="mx-auto">
-									<tbody>
-										<tr>
-											<td className="break-inside-avoid break-after-auto">
-												{l.line}
-											</td>
-										</tr>
-									</tbody>
-								</table>
+								{l.line}
 							</div>
 							<div className="col-start-[8] col-end-[17] pl-2">
 								{l.text.split(" ").map((t, i) => {

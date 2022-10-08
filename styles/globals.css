@@ -2,14 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-@page {
+/* @page {
     size: A4;
     margin: 25mm 25mm 20mm 25mm; 
     
     @top-center {
         content: asdf;
     }
-}
+} */
 
 /* @media print {
     html, body{
@@ -17,3 +17,21 @@
         height: 29.7cm;
     }
 } */
+
+@media print {
+    .grid-item {
+        position: unset !important;
+        transform: unset !important;
+        margin: 10px;
+        display: inline-block;
+    }
+    .grid-item {
+            page-break-inside: avoid;
+            break-inside: avoid;
+    }
+    
+    .grid-layout {
+        height: unset !important;
+        display: table;
+    }
+}
